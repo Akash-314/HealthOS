@@ -28,11 +28,7 @@
 
 /* Sidebar styling flush on left edge */
 .healthos-sidebar {
-<<<<<<< HEAD
-  width: 220px;
-=======
   width: 230px;
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
   background: #ffffff;
   border-right: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
@@ -41,11 +37,8 @@
   padding: 1.5rem 1rem;
   flex-shrink: 0;
   min-height: 100vh;
-<<<<<<< HEAD
-=======
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease;
   z-index: 100;
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
 }
 
 .healthos-brand-logo {
@@ -106,13 +99,6 @@
   border-radius: var(--radius-full);
 }
 
-<<<<<<< HEAD
-.sidebar-footer-text {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  padding: 0.5rem;
-  font-weight: 600;
-=======
 .nav-badge.sos {
   background-color: #ef4444;
 }
@@ -131,7 +117,6 @@
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
 }
 
 /* Main workspace area */
@@ -142,10 +127,7 @@
   background: #f1f5f9;
   overflow: hidden;
   min-height: 100vh;
-<<<<<<< HEAD
-=======
   width: 100%;
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
 }
 
 /* Top Header Component */
@@ -157,8 +139,6 @@
   padding: 0 2.25rem;
   background: #ffffff;
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-<<<<<<< HEAD
-=======
   gap: 1rem;
 }
 
@@ -170,7 +150,6 @@
   cursor: pointer;
   padding: 0.35rem;
   border-radius: var(--radius-md);
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
 }
 
 /* Search bar in header */
@@ -308,13 +287,10 @@
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
-=======
   .mobile-menu-btn {
     display: flex;
     align-items: center;
   }
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
   .healthos-sidebar {
     position: fixed;
     top: 0;
