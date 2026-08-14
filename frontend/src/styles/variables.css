@@ -1,0 +1,68 @@
+:root {
+  /* Modern Healthcare Light Theme (Matching Healight / HealthOS UI Design) */
+  --color-bg-app: #f1f5f9;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-hover: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f8fafc;
+  --color-bg-sidebar: #ffffff;
+  --color-bg-pill: #0f172a;
+  
+  --color-border-subtle: #e2e8f0;
+  --color-border-medium: #cbd5e1;
+  --color-border-strong: #94a3b8;
+  
+  /* Primary Clinical Accents (Sky Blue & Royal Blue) */
+  --color-primary-500: #0284c7;
+  --color-primary-600: #0369a1;
+  --color-primary-700: #075985;
+  --color-primary-light: #e0f2fe;
+  --color-primary-glow: rgba(2, 132, 199, 0.15);
+
+  /* Secondary & Brand Accents */
+  --color-brand-spark: #2563eb;
+  --color-accent-mint: #10b981;
+  --color-accent-mint-light: #dcfce7;
+  --color-accent-cyan: #06b6d4;
+
+  /* Status Tokens */
+  --color-success-500: #10b981;
+  --color-success-bg: #dcfce7;
+  --color-success-text: #15803d;
+
+  --color-warning-500: #f59e0b;
+  --color-warning-bg: #fef3c7;
+  --color-warning-text: #b45309;
+
+  --color-danger-500: #ef4444;
+  --color-danger-bg: #fee2e2;
+  --color-danger-text: #b91c1c;
+  
+  /* Emergency Token (Distinct clinical red indicator) */
+  --color-emergency: #e11d48;
+  --color-emergency-bg: #ffe4e6;
+  --color-emergency-glow: rgba(225, 29, 72, 0.18);
+
+  /* Typography */
+  --color-text-heading: #0f172a;
+  --color-text-body: #334155;
+  --color-text-muted: #64748b;
+  --color-text-dim: #94a3b8;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Layout Spacing & Geometry */
+  --sidebar-width: 240px;
+  --header-height: 68px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-card: 20px;
+  --radius-full: 9999px;
+
+  /* Elevation Shadows matching clean modern design */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --shadow-hover: 0 10px 30px -4px rgba(15, 23, 42, 0.08);
+  --shadow-modal: 0 20px 30px -5px rgba(15, 23, 42, 0.15);
+}

@@ -1,19 +1,39 @@
 # Environment variables
 .env
+.env.local
+.env.*.local
 *.env
 
 # Python
-backend/venv/
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+backend/venv/
+backend/.venv/
+.pytest_cache/
+.coverage
 
-# Node
+# Node & Frontend
+node_modules/
 frontend/node_modules/
 frontend/dist/
+dist/
+.output/
+.vite/
 
-# IDE
+# IDE & Editor
 .vscode/
+.idea/
+*.swp
+*.swo
 
-# OS
+# OS & System
 .DS_Store
 Thumbs.db
+desktop.ini

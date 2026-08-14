@@ -1,0 +1,256 @@
+/* HealthOS Primary Visual Design Reference Implementation */
+
+/* Cool pale blue-gray outer background canvas */
+.healthos-app-shell {
+  min-height: 100vh;
+  background: #e2e8f0;
+  background-image: radial-gradient(circle at 10% 20%, #e2e8f0 0%, #dbe5f0 100%);
+  padding: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-sans);
+  box-sizing: border-box;
+}
+
+/* Large rounded application shell container */
+.healthos-workspace-container {
+  width: 100%;
+  max-width: 1440px;
+  background: #f1f5f9;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  display: flex;
+  overflow: hidden;
+  min-height: 90vh;
+  position: relative;
+}
+
+/* Sidebar styling matching reference image */
+.healthos-sidebar {
+  width: 210px;
+  background: #ffffff;
+  border-right: 1px solid rgba(226, 232, 240, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+}
+
+.healthos-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.brand-spark-icon {
+  color: #2563eb;
+}
+
+.healthos-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.healthos-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  color: #64748b;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.healthos-nav-item:hover {
+  color: #0f172a;
+  background-color: #f1f5f9;
+}
+
+/* Active navigation item uses a dark rounded pill */
+.healthos-nav-item.active {
+  color: #ffffff;
+  background-color: #0f172a;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+}
+
+.healthos-nav-badge {
+  margin-left: auto;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+}
+
+/* Main workspace area */
+.healthos-main-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+/* Top Header Header Component */
+.healthos-top-header {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: transparent;
+}
+
+/* Search bar in header */
+.healthos-search-bar {
+  position: relative;
+  width: 280px;
+}
+
+.healthos-search-bar input {
+  width: 100%;
+  padding: 0.55rem 1rem 0.55rem 2.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: #0f172a;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.healthos-search-bar input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+}
+
+.healthos-search-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.healthos-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.header-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+.header-icon-circle:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.header-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.8rem 0.35rem 0.35rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.user-avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0284c7;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  object-fit: cover;
+}
+
+/* Dashboard content area */
+.healthos-dashboard-content {
+  flex: 1;
+  padding: 0.5rem 2rem 2rem;
+  overflow-y: auto;
+}
+
+/* Popover Panels */
+.popover-panel {
+  position: absolute;
+  top: 60px;
+  right: 2rem;
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  padding: 1.25rem;
+  z-index: 500;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1100px) {
+  .healthos-sidebar {
+    width: 70px;
+    padding: 1.5rem 0.5rem;
+  }
+  .healthos-nav-item span, .healthos-brand-logo span, .healthos-nav-badge, .sidebar-footer-text {
+    display: none;
+  }
+  .healthos-nav-item {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .healthos-app-shell {
+    padding: 0;
+  }
+  .healthos-workspace-container {
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  .healthos-sidebar {
+    display: none;
+  }
+  .healthos-search-bar {
+    width: 180px;
+  }
+}
