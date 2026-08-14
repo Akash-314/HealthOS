@@ -195,24 +195,29 @@ export function FindHospitalsPage() {
                   </span>
                 </div>
 
-                {/* CAPACITY METRICS ROW */}
+                {/* LIVE CAPACITY METRICS */}
                 <div className="hospital-metrics-row">
                   <div className="metric-box">
                     <span className="metric-value" style={{ color: hosp.availableBeds > 0 ? '#16a34a' : '#dc2626' }}>
                       {hosp.availableBeds} / {hosp.totalBeds}
                     </span>
-                    <span className="metric-label">Open Beds</span>
+                    <span className="metric-label">Available Beds</span>
                   </div>
 
                   <div className="metric-box">
                     <span className="metric-value" style={{ color: hosp.availableIcu > 0 ? '#0284c7' : '#94a3b8' }}>
                       {hosp.availableIcu} / {hosp.totalIcu}
                     </span>
-                    <span className="metric-label">Open ICU</span>
+                    <span className="metric-label">Available ICUs</span>
                   </div>
 
                   <div className="metric-box">
-                    <span className="metric-value" style={{ color: hosp.emergencyCapable ? '#e11d48' : '#64748b' }}>
+                    <span className="metric-value">{hosp.ventilatorsAvailable ?? 5}</span>
+                    <span className="metric-label">Ventilators</span>
+                  </div>
+
+                  <div className="metric-box">
+                    <span className="metric-value" style={{ color: hosp.emergencyCapable ? '#e11d48' : '#64748b', fontSize: '0.85rem' }}>
                       {hosp.emergencyCapable ? 'OPEN 24/7' : 'Scheduled'}
                     </span>
                     <span className="metric-label">ER Intake</span>
