@@ -1,0 +1,163 @@
+/**
+ * HealthOS Production Mock Hospitals Dataset — Banda, Uttar Pradesh, India
+ * Real-time capacity states, clinical specs, emergency triage levels, and doctor rosters.
+ */
+
+export const MOCK_HOSPITALS = [
+  {
+    id: 'hosp-001',
+    name: 'Rani Durgavati Medical College & District Hospital',
+    licenseNumber: 'UP-MED-BDA-9948',
+    type: 'Trauma Center Level 1',
+    rating: 4.9,
+    reviewsCount: 342,
+    distanceKm: 2.4,
+    address: 'Kanpur Road, Near Medical College Campus',
+    city: 'Banda, Uttar Pradesh',
+    latitude: 25.4850,
+    longitude: 80.3400,
+    emergencyHotline: '108 / 112 / +91 (5192) 220108',
+    phone: '+91 94151 28310',
+    email: 'triage@rdmc-banda.up.gov.in',
+    operatingHours: '24/7 Open',
+    emergencyCapable: true,
+    totalBeds: 350,
+    availableBeds: 48,
+    totalIcu: 60,
+    availableIcu: 12,
+    ventilatorsAvailable: 8,
+    specializations: ['Emergency & Trauma', 'Cardiology', 'Neurology', 'Orthopedics', 'ICU Care'],
+    departments: [
+      { name: 'Emergency Triage', status: 'Active Intakes', waitTimeMin: 10 },
+      { name: 'Cardiovascular Care', status: 'Operational', waitTimeMin: 20 },
+      { name: 'Neurosurgery Unit', status: 'Operational', waitTimeMin: 35 },
+    ],
+    doctors: [
+      { id: 'doc-101', name: 'Dr. Rajesh Verma', title: 'Chief Cardiologist', specialty: 'Cardiology', experienceYears: 16, availability: 'Available Today', avatarUrl: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80' },
+      { id: 'doc-102', name: 'Dr. Alok Kumar Gupta', title: 'Emergency & Trauma Lead', specialty: 'Emergency Medicine', experienceYears: 14, availability: 'On Shift Now', avatarUrl: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80' },
+    ]
+  },
+  {
+    id: 'hosp-002',
+    name: 'Government District Sadar Hospital Banda',
+    licenseNumber: 'UP-MED-BDA-8812',
+    type: 'District Civil Hospital',
+    rating: 4.8,
+    reviewsCount: 215,
+    distanceKm: 1.2,
+    address: 'Civil Lines, Near District Court Compound',
+    city: 'Banda, Uttar Pradesh',
+    latitude: 25.4750,
+    longitude: 80.3300,
+    emergencyHotline: '108 / +91 (5192) 222049',
+    phone: '+91 94502 10490',
+    email: 'contact@sadar-banda.up.gov.in',
+    operatingHours: '24/7 Open',
+    emergencyCapable: true,
+    totalBeds: 210,
+    availableBeds: 32,
+    totalIcu: 30,
+    availableIcu: 7,
+    ventilatorsAvailable: 5,
+    specializations: ['Pediatrics', 'Neonatal ICU', 'General Medicine', 'Maternity'],
+    departments: [
+      { name: 'Neonatal Intensive Care (NICU)', status: 'Operational', waitTimeMin: 8 },
+      { name: 'Pediatric Care', status: 'Operational', waitTimeMin: 15 },
+    ],
+    doctors: [
+      { id: 'doc-201', name: 'Dr. Priya Mishra', title: 'Senior Pediatrician', specialty: 'Pediatrics', experienceYears: 12, availability: 'Available Today', avatarUrl: 'https://images.unsplash.com/photo-1594824813566-8185b9b8b0e7?w=150&auto=format&fit=crop&q=80' }
+    ]
+  },
+  {
+    id: 'hosp-003',
+    name: 'Shri Ram Super Specialty Heart & Maternity Center',
+    licenseNumber: 'UP-PVT-BDA-7731',
+    type: 'Cardiology & Maternity Center',
+    rating: 5.0,
+    reviewsCount: 489,
+    distanceKm: 0.8,
+    address: 'Kalu Kuan Road, Near Civil Lines Crossing',
+    city: 'Banda, Uttar Pradesh',
+    latitude: 25.4700,
+    longitude: 80.3380,
+    emergencyHotline: '+91 (5192) 228011',
+    phone: '+91 98391 40110',
+    email: 'care@shriramhospital-banda.com',
+    operatingHours: '24/7 Open',
+    emergencyCapable: true,
+    totalBeds: 180,
+    availableBeds: 25,
+    totalIcu: 40,
+    availableIcu: 10,
+    ventilatorsAvailable: 8,
+    specializations: ['Cardiology', 'Cardiac Surgery', 'Obstetrics & Gynaecology', 'CCU Care'],
+    departments: [
+      { name: 'Coronary Care Unit (CCU)', status: 'Operational', waitTimeMin: 10 },
+      { name: 'Maternity Wing', status: 'Operational', waitTimeMin: 12 },
+    ],
+    doctors: [
+      { id: 'doc-301', name: 'Dr. Vikram Singh', title: 'Consultant Cardiologist', specialty: 'Cardiology', experienceYears: 18, availability: 'Available Today', avatarUrl: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&auto=format&fit=crop&q=80' }
+    ]
+  },
+  {
+    id: 'hosp-004',
+    name: 'Sanjeevani Care Emergency Clinic & Nursing Home',
+    licenseNumber: 'UP-PVT-BDA-5529',
+    type: 'Community Health Clinic',
+    rating: 4.3,
+    reviewsCount: 95,
+    distanceKm: 3.5,
+    address: 'Katra Bypass Road, Near Railway Station',
+    city: 'Banda, Uttar Pradesh',
+    latitude: 25.4650,
+    longitude: 80.3250,
+    emergencyHotline: '+91 94152 44192',
+    phone: '+91 94152 44192',
+    email: 'info@sanjeevanibanda.com',
+    operatingHours: '08:00 AM - 10:00 PM',
+    emergencyCapable: false,
+    totalBeds: 45,
+    availableBeds: 14,
+    totalIcu: 0,
+    availableIcu: 0,
+    ventilatorsAvailable: 0,
+    specializations: ['General Practice', 'Urgent Care', 'Family Medicine', 'Vaccinations'],
+    departments: [
+      { name: 'Outpatient Clinic', status: 'Walk-ins Welcome', waitTimeMin: 5 },
+    ],
+    doctors: [
+      { id: 'doc-401', name: 'Dr. Sunita Patel', title: 'Family Physician', specialty: 'General Practice', experienceYears: 10, availability: 'Available Today', avatarUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80' }
+    ]
+  },
+  {
+    id: 'hosp-005',
+    name: 'Bundelkhand Regional Super Specialty Hospital',
+    licenseNumber: 'UP-PVT-BDA-9910',
+    type: 'Regional Specialty Hospital',
+    rating: 5.0,
+    reviewsCount: 612,
+    distanceKm: 14.8,
+    address: 'Lucknow-Banda State Highway, Mahokhar Crossing',
+    city: 'Banda, Uttar Pradesh',
+    latitude: 25.5200,
+    longitude: 80.3600,
+    emergencyHotline: '108 / +91 (5192) 290144',
+    phone: '+91 98380 90144',
+    email: 'triage@bundelkhandhealth.org',
+    operatingHours: '24/7 Open',
+    emergencyCapable: true,
+    totalBeds: 500,
+    availableBeds: 95,
+    totalIcu: 80,
+    availableIcu: 28,
+    ventilatorsAvailable: 20,
+    specializations: ['Neurosurgery', 'Oncology', 'Complex Trauma', 'Organ Care', 'ICU Care'],
+    departments: [
+      { name: 'Trauma ICU', status: 'Active Intakes', waitTimeMin: 5 },
+      { name: 'Advanced Surgical Suite', status: 'Operational', waitTimeMin: 15 },
+    ],
+    doctors: [
+      { id: 'doc-501', name: 'Dr. Suresh Chandra', title: 'Director of Surgery', specialty: 'General Surgery', experienceYears: 25, availability: 'On Shift Now', avatarUrl: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80' }
+    ]
+  }
+];
