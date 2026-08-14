@@ -171,9 +171,15 @@ export function FindHospitalsPage() {
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginTop: '0.65rem', color: '#0f172a' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginTop: '0.65rem', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
                   {hosp.name}
+                  {(hosp.verification_status === 'VERIFIED' || hosp.verification_status === undefined) && (
+                    <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#15803d', background: '#dcfce7', border: '1px solid #bbf7d0', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-full)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <ShieldCheck size={12} /> HealthOS Verified
+                    </span>
+                  )}
                 </h3>
+                
                 <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                   <MapPin size={14} style={{ color: '#0284c7' }} /> {hosp.address}, {hosp.city} • <strong style={{ color: '#0f172a' }}>{hosp.distanceKm} km away</strong>
                 </p>
@@ -206,85 +212,25 @@ export function FindHospitalsPage() {
                   </div>
 
                   <div className="metric-box">
-                    <span className="metric-value">{hosp.ventilatorsAvailable}</span>
-                    <span className="metric-label">Ventilators</span>
+                    <span className="metric-value" style={{ color: hosp.emergencyCapable ? '#e11d48' : '#64748b' }}>
+                      {hosp.emergencyCapable ? 'OPEN 24/7' : 'Scheduled'}
+                    </span>
+                    <span className="metric-label">ER Intake</span>
                   </div>
                 </div>
 
-<<<<<<< HEAD
                 {/* SPECIALIZATIONS PILLS */}
-                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                  {hosp.specializations.map((spec, idx) => (
-                    <span key={idx} style={{ fontSize: '0.725rem', padding: '0.15rem 0.5rem', background: '#f1f5f9', color: '#475569', borderRadius: 'var(--radius-full)', fontWeight: 600 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.25rem' }}>
+                  {hosp.specializations && hosp.specializations.slice(0, 3).map((spec, idx) => (
+                    <span key={idx} style={{ fontSize: '0.725rem', padding: '0.2rem 0.5rem', background: '#f1f5f9', color: '#475569', borderRadius: 'var(--radius-full)', fontWeight: 600 }}>
                       {spec}
                     </span>
                   ))}
                 </div>
-=======
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginTop: '0.65rem', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-                  {hosp.name}
-                  {(hosp.verification_status === 'VERIFIED' || hosp.verification_status === undefined) && (
-                    <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#15803d', background: '#dcfce7', border: '1px solid #bbf7d0', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-full)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                      <ShieldCheck size={12} /> HealthOS Verified
-                    </span>
-                  )}
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <MapPin size={14} style={{ color: '#0284c7' }} /> {hosp.address} ({hosp.distanceKm} km away)
-                </p>
-              </div>
-
-              {/* LIVE CAPACITY METRICS */}
-              <div className="hospital-metrics-row">
-                <div className="metric-box">
-                  <span className="metric-value" style={{ color: hosp.availableBeds > 0 ? '#16a34a' : '#dc2626' }}>
-                    {hosp.availableBeds} / {hosp.totalBeds}
-                  </span>
-                  <span className="metric-label">Available Beds</span>
-                </div>
-
-                {/* CAPACITY METRICS ROW */}
-                <div className="hospital-metrics-row">
-                  <div className="metric-box">
-                    <span className="metric-value" style={{ color: hosp.availableBeds > 0 ? '#16a34a' : '#dc2626' }}>
-                      {hosp.availableBeds} / {hosp.totalBeds}
-                    </span>
-                    <span className="metric-label">Available Beds</span>
-                  </div>
-
-                  <div className="metric-box">
-                    <span className="metric-value" style={{ color: hosp.availableIcu > 0 ? '#0284c7' : '#94a3b8' }}>
-                      {hosp.availableIcu} / {hosp.totalIcu}
-                    </span>
-                    <span className="metric-label">Available ICUs</span>
-                  </div>
-
-                  <div className="metric-box">
-                    <span className="metric-value">{hosp.ventilatorsAvailable}</span>
-                    <span className="metric-label">Ventilators</span>
-                  </div>
-                </div>
-
-                <div className="metric-box">
-                  <span className="metric-value" style={{ color: hosp.emergencyCapable ? '#e11d48' : '#64748b' }}>
-                    {hosp.emergencyCapable ? 'OPEN 24/7' : 'Scheduled'}
-                  </span>
-                  <span className="metric-label">ER Intake</span>
-                </div>
-              </div>
-
-              {/* SPECIALIZATIONS TAGS */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.25rem' }}>
-                {hosp.specializations.slice(0, 3).map((spec, i) => (
-                  <span key={i} style={{ fontSize: '0.725rem', padding: '0.2rem 0.5rem', background: '#f1f5f9', borderRadius: '4px', color: '#475569', fontWeight: 500 }}>
-                    {spec}
-                  </span>
-                ))}
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
               </div>
 
               {/* CARD ACTIONS */}
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: 'auto' }}>
                 <Button variant="primary" size="md" style={{ flex: 1 }} onClick={() => handleBookClick(hosp.id)}>
                   <Calendar size={16} /> Book Appointment
                 </Button>

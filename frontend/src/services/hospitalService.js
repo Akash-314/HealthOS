@@ -91,16 +91,21 @@ export const hospitalService = {
       resultList = resultList.filter((h) => h.availableBeds > 0);
     }
 
-<<<<<<< HEAD
     // 3 Explicit Criteria Sorting Algorithms requested by user
     const sortMode = filters.sortBy || 'nearest';
 
-    if (sortMode === 'nearest') {
+    if (sortMode === 'nearest' || sortMode === 'distance') {
       // 1. Nearest: Sort purely by distance (closest first)
-      result.sort((a, b) => a.distanceKm - b.distanceKm);
+      resultList.sort((a, b) => a.distanceKm - b.distanceKm);
+    } else if (sortMode === 'beds') {
+      // Sort by available beds
+      resultList.sort((a, b) => b.availableBeds - a.availableBeds);
+    } else if (sortMode === 'rating') {
+      // Sort by rating
+      resultList.sort((a, b) => b.rating - a.rating);
     } else if (sortMode === 'far_best') {
-      // 2. Far but Best: Prioritizes top rated (4.8 - 5.0) hospitals located farther away (> 5.0 km)
-      result.sort((a, b) => {
+      // 2. Far but Best: Prioritizes top rated hospitals located farther away (> 5.0 km)
+      resultList.sort((a, b) => {
         const isFarA = a.distanceKm >= 5.0 ? 1 : 0;
         const isFarB = b.distanceKm >= 5.0 ? 1 : 0;
 
@@ -110,28 +115,7 @@ export const hospitalService = {
       });
     } else if (sortMode === 'nearest_best') {
       // 3. Nearest but Best: Combines top rating with minimal distance
-      result.sort((a, b) => {
-=======
-    // 3 Explicit Criteria Sorting Algorithms
-    const sortMode = filters.sortBy || 'nearest';
-
-    if (sortMode === 'nearest' || sortMode === 'distance') {
-      resultList.sort((a, b) => a.distanceKm - b.distanceKm);
-    } else if (sortMode === 'beds') {
-      resultList.sort((a, b) => b.availableBeds - a.availableBeds);
-    } else if (sortMode === 'rating') {
-      resultList.sort((a, b) => b.rating - a.rating);
-    } else if (sortMode === 'far_best') {
       resultList.sort((a, b) => {
-        const isFarA = a.distanceKm >= 5.0 ? 1 : 0;
-        const isFarB = b.distanceKm >= 5.0 ? 1 : 0;
-        if (isFarA !== isFarB) return isFarB - isFarA;
-        if (b.rating !== a.rating) return b.rating - a.rating;
-        return b.availableBeds - a.availableBeds;
-      });
-    } else if (sortMode === 'nearest_best') {
-      resultList.sort((a, b) => {
->>>>>>> 7c1c000190e037c18e1ca5fe241dc1574cbb718f
         const scoreA = (a.rating * 10) / (a.distanceKm + 0.5);
         const scoreB = (b.rating * 10) / (b.distanceKm + 0.5);
         return scoreB - scoreA;
