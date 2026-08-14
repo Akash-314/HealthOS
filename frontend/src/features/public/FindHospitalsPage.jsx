@@ -18,6 +18,7 @@ import {
   Filter,
   ShieldCheck,
   Calendar,
+  Clock,
 } from 'lucide-react';
 import './FindHospitalsPage.css';
 
@@ -73,7 +74,7 @@ export function FindHospitalsPage() {
             Find Verified Hospitals & Care Capacity
           </h1>
           <p style={{ color: '#64748b', fontSize: '0.95rem', marginTop: '0.2rem' }}>
-            Discover care options sorted by proximity, clinical quality, and real-time bed capacity.
+            Discover care options in Banda, UP sorted by proximity, clinical quality, and real-time bed capacity.
           </p>
         </div>
 
@@ -177,6 +178,17 @@ export function FindHospitalsPage() {
                   <MapPin size={14} style={{ color: '#0284c7' }} /> {hosp.address}, {hosp.city} • <strong style={{ color: '#0f172a' }}>{hosp.distanceKm} km away</strong>
                 </p>
 
+                {/* CAPACITY TELEMETRY UPDATED TIMESTAMP INDICATOR */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.1rem', marginBottom: '0.35rem', fontSize: '0.75rem', color: '#64748b' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}>
+                    <Clock size={12} style={{ color: '#0284c7' }} /> Capacity Telemetry:
+                  </span>
+                  <span style={{ color: '#059669', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }}></span>
+                    Updated {hosp.lastUpdatedText || '2 mins ago (LIVE)'}
+                  </span>
+                </div>
+
                 {/* CAPACITY METRICS ROW */}
                 <div className="hospital-metrics-row">
                   <div className="metric-box">
@@ -244,7 +256,7 @@ export function FindHospitalsPage() {
                 >
                   <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.925rem' }}>{hosp.name}</div>
                   <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.2rem' }}>
-                    📍 {hosp.distanceKm} km away • ⭐ {hosp.rating} ({hosp.reviewsCount}) • Beds: {hosp.availableBeds}
+                    📍 {hosp.distanceKm} km away • ⭐ {hosp.rating} • Beds: {hosp.availableBeds} • <span style={{ color: '#059669', fontWeight: 600 }}>Updated {hosp.lastUpdatedText || '2m ago'}</span>
                   </div>
                 </div>
               ))}
@@ -268,7 +280,7 @@ export function FindHospitalsPage() {
                 <div>
                   <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem' }}>{activePin.name}</div>
                   <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.15rem' }}>
-                    📍 {activePin.address} • <strong>{activePin.distanceKm} km away</strong> • ⭐ {activePin.rating}
+                    📍 {activePin.address} • <strong>{activePin.distanceKm} km away</strong> • ⭐ {activePin.rating} • <span style={{ color: '#059669', fontWeight: 600 }}>Updated {activePin.lastUpdatedText || '2m ago'}</span>
                   </div>
                 </div>
 

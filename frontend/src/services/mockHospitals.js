@@ -26,6 +26,7 @@ export const MOCK_HOSPITALS = [
     totalIcu: 60,
     availableIcu: 12,
     ventilatorsAvailable: 8,
+    lastUpdatedText: '2 mins ago (Live Telemetry)',
     specializations: ['Emergency & Trauma', 'Cardiology', 'Neurology', 'Orthopedics', 'ICU Care'],
     departments: [
       { name: 'Emergency Triage', status: 'Active Intakes', waitTimeMin: 10 },
@@ -59,6 +60,7 @@ export const MOCK_HOSPITALS = [
     totalIcu: 30,
     availableIcu: 7,
     ventilatorsAvailable: 5,
+    lastUpdatedText: '5 mins ago',
     specializations: ['Pediatrics', 'Neonatal ICU', 'General Medicine', 'Maternity'],
     departments: [
       { name: 'Neonatal Intensive Care (NICU)', status: 'Operational', waitTimeMin: 8 },
@@ -90,6 +92,7 @@ export const MOCK_HOSPITALS = [
     totalIcu: 40,
     availableIcu: 10,
     ventilatorsAvailable: 8,
+    lastUpdatedText: '1 min ago (Live Telemetry)',
     specializations: ['Cardiology', 'Cardiac Surgery', 'Obstetrics & Gynaecology', 'CCU Care'],
     departments: [
       { name: 'Coronary Care Unit (CCU)', status: 'Operational', waitTimeMin: 10 },
@@ -121,6 +124,7 @@ export const MOCK_HOSPITALS = [
     totalIcu: 0,
     availableIcu: 0,
     ventilatorsAvailable: 0,
+    lastUpdatedText: '12 mins ago',
     specializations: ['General Practice', 'Urgent Care', 'Family Medicine', 'Vaccinations'],
     departments: [
       { name: 'Outpatient Clinic', status: 'Walk-ins Welcome', waitTimeMin: 5 },
@@ -151,6 +155,7 @@ export const MOCK_HOSPITALS = [
     totalIcu: 80,
     availableIcu: 28,
     ventilatorsAvailable: 20,
+    lastUpdatedText: '3 mins ago (Live Telemetry)',
     specializations: ['Neurosurgery', 'Oncology', 'Complex Trauma', 'Organ Care', 'ICU Care'],
     departments: [
       { name: 'Trauma ICU', status: 'Active Intakes', waitTimeMin: 5 },
