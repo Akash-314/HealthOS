@@ -13,15 +13,15 @@ export function AppointmentsCard({
   const defaultList = [
     {
       id: 'apt-1',
-      name: 'Jacob Jones',
+      name: 'Rajesh Kumar',
       reason: 'General Consultation',
       badge: 'Today',
       time: '09.40 AM',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
     },
     {
       id: 'apt-2',
-      name: 'Jenny Wilson',
+      name: 'Priya Sharma',
       reason: 'Cardiology',
       badge: 'Today',
       time: '10.40 AM',
@@ -29,15 +29,15 @@ export function AppointmentsCard({
     },
     {
       id: 'apt-3',
-      name: 'Albert Flores',
+      name: 'Amit Verma',
       reason: 'Follow-up',
       badge: 'Today',
       time: '11.20 AM',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
     },
     {
       id: 'apt-4',
-      name: 'Esther Howard',
+      name: 'Kavita Singh',
       reason: 'Cardiology',
       badge: 'Today',
       time: '12.10 PM',

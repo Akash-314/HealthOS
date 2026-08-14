@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../app/providers/AuthProvider';
-import { Search, Settings, Bell, ChevronDown, User, LogOut, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
+import {
+  Search,
+  Settings,
+  Bell,
+  ChevronDown,
+  User,
+  LogOut,
+  Building2,
+  ShieldCheck,
+  LayoutDashboard,
+} from 'lucide-react';
 
 export function DashboardHeader({ onSearch }) {
   const { user, logout } = useAuth();
@@ -11,7 +21,7 @@ export function DashboardHeader({ onSearch }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const displayName = user?.full_name || user?.email?.split('@')[0] || 'Nola Hawkins';
+  const displayName = user?.full_name || user?.email?.split('@')[0] || 'Akash Sharma';
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +38,7 @@ export function DashboardHeader({ onSearch }) {
         <Search size={16} className="healthos-search-icon" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search hospitals in Banda, UP..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -71,27 +81,57 @@ export function DashboardHeader({ onSearch }) {
           {/* PROFILE MENU POPOVER */}
           {showProfileMenu && (
             <div className="popover-panel">
-              <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9', marginBottom: '0.75rem' }}>
+              <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9', marginBottom: '0.5rem' }}>
                 <div style={{ fontWeight: 800, color: '#0f172a', fontSize: '0.95rem' }}>{displayName}</div>
-                <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{user?.email || 'authenticated@healthos.org'}</div>
-                <div style={{ fontSize: '0.75rem', color: '#0284c7', fontWeight: 700, marginTop: '0.25rem' }}>
-                  ROLE: {user?.role || 'HEALTHOS MEMBER'}
+                <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{user?.email || 'akash@healthos.org.in'}</div>
+                <div style={{ fontSize: '0.725rem', color: '#0284c7', fontWeight: 700, marginTop: '0.25rem' }}>
+                  LOCATION: BANDA, UTTAR PRADESH
                 </div>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {/* 1-CLICK DASHBOARD PORTAL SWITCHER */}
+              <div style={{ padding: '0.5rem 0', borderTop: '1px solid #f1f5f9', borderBottom: '1px solid #f1f5f9', margin: '0.5rem 0' }}>
+                <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', marginBottom: '0.35rem', letterSpacing: '0.04em' }}>
+                  Go to Dashboard Portal
+                </div>
+
                 <button
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', padding: '0.4rem', fontSize: '0.85rem', color: '#475569', cursor: 'pointer', textAlign: 'left' }}
-                  onClick={() => navigate('/contact')}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', background: 'transparent', border: 'none', padding: '0.4rem 0.25rem', fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, cursor: 'pointer', textAlign: 'left' }}
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate('/patient/dashboard');
+                  }}
                 >
-                  <ShieldCheck size={16} /> Security & Account
+                  <User size={15} style={{ color: '#0284c7' }} /> Patient Dashboard
                 </button>
 
                 <button
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', padding: '0.4rem', fontSize: '0.85rem', color: '#dc2626', fontWeight: 700, cursor: 'pointer', textAlign: 'left' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', background: 'transparent', border: 'none', padding: '0.4rem 0.25rem', fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, cursor: 'pointer', textAlign: 'left' }}
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate('/hospital/dashboard');
+                  }}
+                >
+                  <Building2 size={15} style={{ color: '#10b981' }} /> Hospital Dashboard
+                </button>
+
+                <button
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', background: 'transparent', border: 'none', padding: '0.4rem 0.25rem', fontSize: '0.85rem', color: '#0f172a', fontWeight: 600, cursor: 'pointer', textAlign: 'left' }}
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate('/admin/dashboard');
+                  }}
+                >
+                  <ShieldCheck size={15} style={{ color: '#2563eb' }} /> Admin / Authority Dashboard
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <button
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'transparent', border: 'none', padding: '0.4rem 0.25rem', fontSize: '0.85rem', color: '#dc2626', fontWeight: 700, cursor: 'pointer', textAlign: 'left' }}
                   onClick={logout}
                 >
-                  <LogOut size={16} /> Sign Out
+                  <LogOut size={15} /> Sign Out
                 </button>
               </div>
             </div>
@@ -110,12 +150,12 @@ export function DashboardHeader({ onSearch }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.825rem' }}>
             <div style={{ padding: '0.6rem', background: '#f0f9ff', borderRadius: 'var(--radius-md)', borderLeft: '3px solid #0284c7' }}>
               <div style={{ fontWeight: 700, color: '#0f172a' }}>Bed Capacity Updated</div>
-              <div style={{ color: '#64748b' }}>Metropolitan General added 12 available beds.</div>
+              <div style={{ color: '#64748b' }}>Rani Durgavati Medical College Banda added 12 available ICU beds.</div>
             </div>
 
             <div style={{ padding: '0.6rem', background: '#fef3c7', borderRadius: 'var(--radius-md)', borderLeft: '3px solid #f59e0b' }}>
               <div style={{ fontWeight: 700, color: '#0f172a' }}>Upcoming Appointment</div>
-              <div style={{ color: '#64748b' }}>Consultation with Dr. Johan Henry at 09:40 AM.</div>
+              <div style={{ color: '#64748b' }}>Consultation with Dr. Rajesh Verma at 09:40 AM.</div>
             </div>
           </div>
         </div>

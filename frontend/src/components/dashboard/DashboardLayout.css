@@ -1,41 +1,42 @@
-/* HealthOS Primary Visual Design Reference Implementation */
+/* HealthOS Primary Visual Design Reference Implementation — Full Screen Edge-to-Edge Workspace */
 
-/* Cool pale blue-gray outer background canvas */
+/* Full screen app shell covering 100% of all 4 sides */
 .healthos-app-shell {
   min-height: 100vh;
-  background: #e2e8f0;
-  background-image: radial-gradient(circle at 10% 20%, #e2e8f0 0%, #dbe5f0 100%);
-  padding: 1.25rem;
+  width: 100vw;
+  background: #f1f5f9;
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: var(--font-sans);
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* Large rounded application shell container */
+/* Application shell container spanning 100% width and height without empty margins */
 .healthos-workspace-container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 100%;
   background: #f1f5f9;
-  border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   overflow: hidden;
-  min-height: 90vh;
+  min-height: 100vh;
   position: relative;
 }
 
-/* Sidebar styling matching reference image */
+/* Sidebar styling flush on left edge */
 .healthos-sidebar {
-  width: 210px;
+  width: 220px;
   background: #ffffff;
-  border-right: 1px solid rgba(226, 232, 240, 0.6);
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5rem 1rem;
   flex-shrink: 0;
+  min-height: 100vh;
 }
 
 .healthos-brand-logo {
@@ -96,6 +97,13 @@
   border-radius: var(--radius-full);
 }
 
+.sidebar-footer-text {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  padding: 0.5rem;
+  font-weight: 600;
+}
+
 /* Main workspace area */
 .healthos-main-body {
   flex: 1;
@@ -103,28 +111,30 @@
   flex-direction: column;
   background: #f1f5f9;
   overflow: hidden;
+  min-height: 100vh;
 }
 
-/* Top Header Header Component */
+/* Top Header Component */
 .healthos-top-header {
   height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  background: transparent;
+  padding: 0 2.25rem;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 /* Search bar in header */
 .healthos-search-bar {
   position: relative;
-  width: 280px;
+  width: 320px;
 }
 
 .healthos-search-bar input {
   width: 100%;
   padding: 0.55rem 1rem 0.55rem 2.5rem;
-  background: #ffffff;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -132,10 +142,12 @@
   outline: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .healthos-search-bar input:focus {
   border-color: #0284c7;
+  background: #ffffff;
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
 
@@ -157,7 +169,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ffffff;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
@@ -169,8 +181,8 @@
 }
 
 .header-icon-circle:hover {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #0f172a;
+  color: #ffffff;
 }
 
 .header-user-btn {
@@ -178,7 +190,7 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.35rem 0.8rem 0.35rem 0.35rem;
-  background: #ffffff;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: var(--radius-full);
   cursor: pointer;
@@ -201,7 +213,7 @@
 /* Dashboard content area */
 .healthos-dashboard-content {
   flex: 1;
-  padding: 0.5rem 2rem 2rem;
+  padding: 1.5rem 2.25rem 2.5rem;
   overflow-y: auto;
 }
 
@@ -209,7 +221,7 @@
 .popover-panel {
   position: absolute;
   top: 60px;
-  right: 2rem;
+  right: 2.25rem;
   width: 320px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -240,13 +252,6 @@
 }
 
 @media (max-width: 768px) {
-  .healthos-app-shell {
-    padding: 0;
-  }
-  .healthos-workspace-container {
-    border-radius: 0;
-    min-height: 100vh;
-  }
   .healthos-sidebar {
     display: none;
   }
