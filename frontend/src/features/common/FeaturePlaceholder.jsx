@@ -25,12 +25,47 @@ import {
   ArrowRight,
   Filter,
 } from 'lucide-react';
+import { supabase } from '../../lib/supabase/client';
 import './FeaturePlaceholder.css';
 
 export function FeaturePlaceholder({ title, description, category, role }) {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('ALL');
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [appointmentsList, setAppointmentsList] = useState([]);
+  const [loadingApts, setLoadingApts] = useState(true);
+
+  React.useEffect(() => {
+    async function fetchLiveAppointments() {
+      setLoadingApts(true);
+      try {
+        const { data, error } = await supabase
+          .from('appointments')
+          .select('*, hospitals(name, address), doctors(name, specialty)');
+        if (!error && Array.isArray(data)) {
+          const mapped = data.map((apt) => ({
+            id: apt.id ? `APT-${apt.id.substring(0, 4).toUpperCase()}` : 'APT-LIVE',
+            hospitalName: apt.hospitals?.name || 'HealthOS Partner Hospital',
+            doctorName: apt.doctors?.name || 'Attending Doctor',
+            specialty: apt.doctors?.specialty || 'General Medicine',
+            date: new Date(apt.appointment_date || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            time: new Date(apt.appointment_date || Date.now()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+            status: apt.status || 'SCHEDULED',
+            type: apt.symptoms || 'Clinical Consultation',
+            token: `TOKEN #${Math.floor(Math.random() * 20) + 1}`,
+            location: apt.hospitals?.address || 'Banda, Uttar Pradesh',
+          }));
+          setAppointmentsList(mapped);
+        }
+      } catch (_err) {
+        setAppointmentsList([]);
+      } finally {
+        setLoadingApts(false);
+      }
+    }
+    fetchLiveAppointments();
+  }, []);
 
   // If dashboard title, render Healight overview
   if (title?.toLowerCase().includes('dashboard') || title?.toLowerCase().includes('overview')) {
@@ -39,46 +74,7 @@ export function FeaturePlaceholder({ title, description, category, role }) {
 
   // APPOINTMENTS MODULE CUSTOM FEATURE VIEW
   if (title?.toLowerCase().includes('appointment') || title?.toLowerCase().includes('booking')) {
-    const sampleAppointments = [
-      {
-        id: 'APT-9042',
-        hospitalName: 'Rani Durgavati Medical College & District Hospital',
-        doctorName: 'Dr. Rajesh Verma',
-        specialty: 'Emergency Cardiology',
-        date: 'Tomorrow, Aug 15, 2026',
-        time: '10:30 AM',
-        status: 'CONFIRMED',
-        type: 'In-Person Consultation',
-        token: 'TOKEN #14',
-        location: 'Kanpur Road, Banda, UP',
-      },
-      {
-        id: 'APT-8819',
-        hospitalName: 'Government District Sadar Hospital Banda',
-        doctorName: 'Dr. Alok Kumar Gupta',
-        specialty: 'Trauma & General Surgery',
-        date: 'Aug 18, 2026',
-        time: '02:15 PM',
-        status: 'SCHEDULED',
-        type: 'Follow-up Checkup',
-        token: 'TOKEN #08',
-        location: 'Civil Lines, Banda, UP',
-      },
-      {
-        id: 'APT-7410',
-        hospitalName: 'Metropolitan General Hospital & Trauma Center',
-        doctorName: 'Dr. Ananya Sharma',
-        specialty: 'Pulmonology',
-        date: 'Aug 02, 2026',
-        time: '11:00 AM',
-        status: 'COMPLETED',
-        type: 'Routine Triage',
-        token: 'TOKEN #22',
-        location: 'Healthcare Blvd, Metro Central',
-      },
-    ];
-
-    const filteredAppointments = sampleAppointments.filter((apt) => {
+    const filteredAppointments = appointmentsList.filter((apt) => {
       if (activeTab === 'UPCOMING' && apt.status === 'COMPLETED') return false;
       if (activeTab === 'COMPLETED' && apt.status !== 'COMPLETED') return false;
       if (searchTerm.trim()) {
@@ -91,6 +87,10 @@ export function FeaturePlaceholder({ title, description, category, role }) {
       }
       return true;
     });
+
+    const upcomingCount = appointmentsList.filter((a) => a.status !== 'COMPLETED').length;
+    const completedCount = appointmentsList.filter((a) => a.status === 'COMPLETED').length;
+    const nextTime = appointmentsList.length > 0 ? appointmentsList[0].time : 'None';
 
     return (
       <div className="module-feature-container">
@@ -121,7 +121,7 @@ export function FeaturePlaceholder({ title, description, category, role }) {
               <Calendar size={20} />
             </div>
             <div>
-              <div className="stat-number">2</div>
+              <div className="stat-number">{upcomingCount}</div>
               <div className="stat-label">Upcoming Appointments</div>
             </div>
           </div>
@@ -131,7 +131,7 @@ export function FeaturePlaceholder({ title, description, category, role }) {
               <CheckCircle2 size={20} />
             </div>
             <div>
-              <div className="stat-number">14</div>
+              <div className="stat-number">{completedCount}</div>
               <div className="stat-label">Completed Consultations</div>
             </div>
           </div>
@@ -141,8 +141,8 @@ export function FeaturePlaceholder({ title, description, category, role }) {
               <Stethoscope size={20} />
             </div>
             <div>
-              <div className="stat-number">3</div>
-              <div className="stat-label">Primary Care Specialists</div>
+              <div className="stat-number">{appointmentsList.length}</div>
+              <div className="stat-label">Total Appointments</div>
             </div>
           </div>
 
@@ -151,8 +151,8 @@ export function FeaturePlaceholder({ title, description, category, role }) {
               <Clock size={20} />
             </div>
             <div>
-              <div className="stat-number">10:30 AM</div>
-              <div className="stat-label">Next Appointment (Tomorrow)</div>
+              <div className="stat-number">{nextTime}</div>
+              <div className="stat-label">Next Appointment</div>
             </div>
           </div>
         </div>
@@ -164,19 +164,19 @@ export function FeaturePlaceholder({ title, description, category, role }) {
               className={`tab-pill ${activeTab === 'ALL' ? 'active' : ''}`}
               onClick={() => setActiveTab('ALL')}
             >
-              All Appointments (3)
+              All Appointments ({appointmentsList.length})
             </button>
             <button
               className={`tab-pill ${activeTab === 'UPCOMING' ? 'active' : ''}`}
               onClick={() => setActiveTab('UPCOMING')}
             >
-              Upcoming (2)
+              Upcoming ({upcomingCount})
             </button>
             <button
               className={`tab-pill ${activeTab === 'COMPLETED' ? 'active' : ''}`}
               onClick={() => setActiveTab('COMPLETED')}
             >
-              Past Records (1)
+              Past Records ({completedCount})
             </button>
           </div>
 

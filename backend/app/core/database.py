@@ -8,8 +8,9 @@ from app.core.config import settings
 db_url = settings.DATABASE_URL
 connect_args = {}
 
-# Configure SSL for remote PostgreSQL / Supabase connections if applicable
-if "supabase.co" in db_url or "supabase.com" in db_url:
+# Configure SSL and connection timeout for remote PostgreSQL / Supabase connections
+if "supabase.co" in db_url or "supabase.com" in db_url or "postgres" in db_url:
+    connect_args["connect_timeout"] = 2
     if "sslmode" not in db_url:
         connect_args["sslmode"] = "require"
 
@@ -25,9 +26,12 @@ try:
         pool_size=10,
         max_overflow=20
     )
+    # Test connection
+    with engine.connect() as conn:
+        pass
 except Exception as err:
-    print(f"PostgreSQL connection engine setup notice: {err}. Using local SQLite fallback.")
-    db_url = "sqlite:///./healthos_fallback.db"
+    print(f"PostgreSQL connection notice ({err}). Switching engine to local SQLite fallback.")
+    db_url = "sqlite:///./healthos_dev.db"
     engine = create_engine(db_url, connect_args={"check_same_thread": False})
 
 # Session factory for DB interactions

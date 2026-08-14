@@ -22,29 +22,7 @@ export const emergencyHospitalService = {
       // Fallback
     }
 
-    // Return sample active emergency for demonstration
-    return [
-      {
-        id: 'emg-demo-hospital-1',
-        access_token: 'tok-demo-hospital-1',
-        guest_patient_name: 'Rajesh Kumar',
-        guest_patient_age: 54,
-        guest_patient_gender: 'Male',
-        guest_patient_phone: '+91 98390 12345',
-        emergency_type: 'POSSIBLE_HEART_ATTACK',
-        severity: 'CRITICAL',
-        status: 'HOSPITAL_SELECTED',
-        address_text: 'Kanpur Road, Banda, Uttar Pradesh',
-        latitude: 25.4850,
-        longitude: 80.3400,
-        known_allergies: 'Penicillin',
-        known_conditions: 'Hypertension',
-        blood_group: 'B+',
-        is_conscious: true,
-        is_breathing_normally: true,
-        created_at: new Date().toISOString(),
-      },
-    ];
+    return [];
   },
 
   /**

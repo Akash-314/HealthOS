@@ -62,12 +62,15 @@ export const hospitalVerificationService = {
     const healthosId = this.generateHealthOSHospitalId();
     const submittedAt = new Date().toISOString();
 
+    const regLicense = (formData.registrationNumber || formData.licenseNumber || `UP-MED-${healthosId.replace('HOS-HOSP-', '')}`).trim();
+
     // 1. Update Hospital Info in Supabase
     const hospitalPayload = {
       healthos_hospital_id: healthosId,
       verification_status: 'UNDER_REVIEW',
       name: formData.legalName || formData.hospitalName || 'HealthOS Facility',
-      registration_number: formData.registrationNumber,
+      license_number: regLicense,
+      registration_number: regLicense,
       registration_authority: formData.registrationAuthority || 'State Medical Council UP',
       registration_state: formData.registrationState || 'Uttar Pradesh',
       registration_date: formData.registrationDate || null,
@@ -76,17 +79,23 @@ export const hospitalVerificationService = {
       abdm_verification_status: formData.abdmFacilityId ? 'PROVIDED_PENDING_VERIFICATION' : 'NOT_PROVIDED',
       address: formData.address || 'Banda, Uttar Pradesh',
       emergency_contact: formData.officialPhone || '+91 94150 12345',
+      is_active: true,
     };
 
     try {
       if (hospitalId && hospitalId.length > 20 && !hospitalId.startsWith('demo-')) {
         await supabase.from('hospitals').update(hospitalPayload).eq('id', hospitalId);
       } else {
-        const { data: insertedHosp } = await supabase.from('hospitals').insert(hospitalPayload).select().single();
-        if (insertedHosp) hospitalId = insertedHosp.id;
+        const { data: insertedHosp, error: insErr } = await supabase.from('hospitals').insert(hospitalPayload).select().single();
+        if (insErr) {
+          console.warn('Supabase hospital insert notice:', insErr);
+        }
+        if (insertedHosp && insertedHosp.id) {
+          hospitalId = insertedHosp.id;
+        }
       }
     } catch (_e) {
-      // Fallback
+      console.warn('Hospital insert exception:', _e);
     }
 
     if (!hospitalId) hospitalId = `hosp-verif-${Date.now()}`;
@@ -242,71 +251,11 @@ export const hospitalVerificationService = {
       }
 
       const { data, error } = await query;
-      if (!error && Array.isArray(data) && data.length > 0) {
+      if (!error && Array.isArray(data)) {
         applications = data;
       }
     } catch (_e) {
       // Fallback
-    }
-
-    // Fallback seed applications if Supabase table has no entries yet
-    if (applications.length === 0) {
-      applications = [
-        {
-          id: 'app-seed-001',
-          hospital_id: 'a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6',
-          healthos_hospital_id: 'HOS-HOSP-9948RD',
-          hospital_name: 'Rani Durgavati Medical College & District Hospital',
-          registration_number: 'UP-MED-BDA-9948',
-          abdm_facility_id: 'IN0910023410',
-          status: 'VERIFIED',
-          submitted_at: '2026-08-10T10:00:00Z',
-          reviewed_at: '2026-08-11T14:30:00Z',
-          representative: { full_name: 'Dr. Rajesh Verma', designation: 'Medical Superintendent', official_email: 'triage@rdmc-banda.up.gov.in', mobile_number: '+91 94151 28310', relationship: 'DIRECTOR' },
-          documents: [
-            { document_type: 'REGISTRATION_CERTIFICATE', file_name: 'RDMC_State_Govt_Medical_License.pdf' },
-            { document_type: 'AUTHORIZATION_DOCUMENT', file_name: 'Director_Authorization_Letter.pdf' },
-          ],
-          checks: [
-            { check_key: 'hospital_identity', status: 'VERIFIED', notes: 'State Medical College established by UP Govt.' },
-            { check_key: 'registration_number', status: 'VERIFIED', notes: 'Valid UP Govt registration license.' },
-          ],
-        },
-        {
-          id: 'app-seed-002',
-          hospital_id: 'c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f',
-          healthos_hospital_id: 'HOS-HOSP-7731SR',
-          hospital_name: 'Shri Ram Super Specialty Heart & Maternity Center',
-          registration_number: 'UP-PVT-BDA-7731',
-          abdm_facility_id: 'IN0910055291',
-          status: 'UNDER_REVIEW',
-          submitted_at: '2026-08-14T09:15:00Z',
-          representative: { full_name: 'Suresh Sharma', designation: 'Hospital Director', official_email: 'contact@shriramhospital.org', mobile_number: '+91 98390 54321', relationship: 'OWNER' },
-          documents: [
-            { document_type: 'REGISTRATION_CERTIFICATE', file_name: 'ShriRam_Clinical_Establishment_Reg.pdf' },
-            { document_type: 'AUTHORIZATION_DOCUMENT', file_name: 'Owner_Authorization_Proof.pdf' },
-          ],
-          checks: [
-            { check_key: 'hospital_identity', status: 'VERIFIED', notes: 'Physical hospital verified at Kalu Kuan Road Banda.' },
-            { check_key: 'registration_number', status: 'NEEDS_MORE_INFORMATION', notes: 'Awaiting renewal validation date.' },
-          ],
-        },
-        {
-          id: 'app-seed-003',
-          hospital_id: 'd4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a',
-          healthos_hospital_id: 'HOS-HOSP-5529SJ',
-          hospital_name: 'Sanjeevani Care Emergency Clinic & Nursing Home',
-          registration_number: 'UP-PVT-BDA-5529',
-          abdm_facility_id: 'IN0910088190',
-          status: 'PENDING',
-          submitted_at: '2026-08-13T16:45:00Z',
-          representative: { full_name: 'Anil Verma', designation: 'Administrator', official_email: 'info@sanjeevaniclinic.org', mobile_number: '+91 94152 44192', relationship: 'HOSPITAL_ADMINISTRATOR' },
-          documents: [
-            { document_type: 'REGISTRATION_CERTIFICATE', file_name: 'Sanjeevani_Establishment_License.pdf' }
-          ],
-          checks: [],
-        },
-      ];
     }
 
     if (statusFilter !== 'ALL') {

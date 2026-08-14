@@ -21,12 +21,15 @@ import { ContactPage } from '../../features/public/ContactPage';
 
 // Patient Feature Components
 import { PatientProfilePage } from '../../features/patient/PatientProfilePage';
+import { AIHealthAssistant } from '../../features/patient/AIHealthAssistant';
+
 
 // Hospital & Verification Components
 import { EmergencyTrackingView } from '../../components/emergency/EmergencyTrackingView';
 import { HospitalEmergencyDashboard } from '../../features/hospital/HospitalEmergencyDashboard';
 import { HospitalVerificationForm } from '../../components/hospital/HospitalVerificationForm';
 import { AdminVerificationDashboard } from '../../features/admin/AdminVerificationDashboard';
+import { BedCapacityForecaster } from '../../components/hospital/BedCapacityForecaster';
 
 // Auth Feature Components
 import { Login } from '../../features/auth/Login';
@@ -82,7 +85,8 @@ export function AppRoutes() {
         <Route path="prescriptions" element={<FeaturePlaceholder title="Prescriptions & Medications" category="PATIENT" role="PATIENT" />} />
         <Route path="home-care" element={<FeaturePlaceholder title="Home Care & Tele-triage" category="PATIENT" role="PATIENT" />} />
         <Route path="insurance" element={<FeaturePlaceholder title="Health Insurance Coverage" category="PATIENT" role="PATIENT" />} />
-        <Route path="ai" element={<FeaturePlaceholder title="AI Symptom Checker" category="AI" role="PATIENT" />} />
+        <Route path="ai" element={<AIHealthAssistant />} />
+        <Route path="ai-assistant" element={<AIHealthAssistant />} />
         <Route path="settings" element={<FeaturePlaceholder title="Patient Account Settings" category="PATIENT" role="PATIENT" />} />
       </Route>
 
@@ -101,8 +105,9 @@ export function AppRoutes() {
         <Route path="dashboard" element={<FeaturePlaceholder title="Hospital Command Overview" category="HOSPITAL" role="HOSPITAL" />} />
         <Route path="verification" element={<HospitalVerificationForm hospitalId="a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6" />} />
         <Route path="profile" element={<FeaturePlaceholder title="Hospital Profile & Licensing" category="HOSPITAL" role="HOSPITAL" />} />
-        <Route path="beds" element={<FeaturePlaceholder title="Beds & Ward Management" category="HOSPITAL" role="HOSPITAL" />} />
-        <Route path="icu" element={<FeaturePlaceholder title="ICU Capacity & Triage" category="HOSPITAL" role="HOSPITAL" />} />
+        <Route path="beds" element={<BedCapacityForecaster />} />
+        <Route path="icu" element={<BedCapacityForecaster />} />
+        <Route path="forecast" element={<BedCapacityForecaster />} />
         <Route path="doctors" element={<FeaturePlaceholder title="Doctors Roster & Schedules" category="HOSPITAL" role="HOSPITAL" />} />
         <Route path="staff" element={<FeaturePlaceholder title="Hospital Staff Directory" category="HOSPITAL" role="HOSPITAL" />} />
         <Route path="appointments" element={<FeaturePlaceholder title="Hospital Appointment Desk" category="HOSPITAL" role="HOSPITAL" />} />
@@ -129,6 +134,7 @@ export function AppRoutes() {
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<FeaturePlaceholder title="Regional Command Center" category="ADMIN" role="ADMIN" />} />
         <Route path="verifications" element={<AdminVerificationDashboard />} />
+        <Route path="capacity-forecast" element={<BedCapacityForecaster />} />
         <Route path="network" element={<FeaturePlaceholder title="Healthcare Network Status" category="ADMIN" role="ADMIN" />} />
         <Route path="emergencies" element={<FeaturePlaceholder title="Regional Emergency Load" category="EMERGENCY" role="ADMIN" />} />
         <Route path="health-trends" element={<FeaturePlaceholder title="Public Health Trends" category="ADMIN" role="ADMIN" />} />

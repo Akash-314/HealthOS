@@ -50,19 +50,7 @@ export const hospitalService = {
         }));
       }
     } catch (_err) {
-      // Fallback
-    }
-
-    // Merge with Banda dataset if database list is small
-    if (resultList.length === 0) {
-      resultList = [...MOCK_HOSPITALS];
-    } else {
-      // Append mock hospitals if not present
-      MOCK_HOSPITALS.forEach((mockHosp) => {
-        if (!resultList.some((r) => r.name === mockHosp.name)) {
-          resultList.push(mockHosp);
-        }
-      });
+      resultList = [];
     }
 
     // Filter by query (search term)

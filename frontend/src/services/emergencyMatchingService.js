@@ -45,15 +45,11 @@ export const emergencyMatchingService = {
         .eq('is_active', true)
         .eq('verification_status', 'VERIFIED');
 
-      if (!error && Array.isArray(data) && data.length > 0) {
+      if (!error && Array.isArray(data)) {
         candidateHospitals = data;
       }
     } catch (_err) {
-      // Fallback
-    }
-
-    if (candidateHospitals.length === 0) {
-      candidateHospitals = MOCK_HOSPITALS;
+      candidateHospitals = [];
     }
 
     // MANDATORY SAFETY FILTER: ONLY 'VERIFIED' HOSPITALS ARE ALLOWED IN EMERGENCY MATCHING

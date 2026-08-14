@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     # Default fallback to local SQLite for offline development if DATABASE_URL is not set
     DATABASE_URL: str = "sqlite:///./healthos_dev.db"
 
+    # Gemini AI Configuration
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-3.6-flash"
+
     # CORS Origins configuration
     BACKEND_CORS_ORIGINS: List[str] = [
         "http://localhost:5173",

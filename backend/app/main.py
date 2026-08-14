@@ -21,10 +21,13 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_headers=["*"],
     )
 
-# Initialize database schema tables on startup
+from app.services.gemini_service import gemini_service
+
+# Initialize database schema tables and verify services on startup
 @app.on_event("startup")
 def on_startup():
     init_db()
+    gemini_service.verify_configuration()
 
 # Include v1 API Router
 app.include_router(api_router, prefix=settings.API_V1_STR)

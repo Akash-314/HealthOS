@@ -44,7 +44,7 @@ export function DashboardSidebar({ isMobileOpen, onCloseMobile }) {
     { to: '/patient/hospitals', label: 'Find Hospitals', icon: Building2 },
     { to: '/patient/appointments', label: 'Appointments', icon: Calendar },
     { to: '/patient/emergency', label: 'Emergency SOS', icon: AlertTriangle, badge: 'SOS' },
-    { to: '/patient/ai', label: 'AI Symptoms', icon: Bot },
+    { to: '/patient/ai', label: 'AI Health Assistant', icon: Bot, badge: 'AI' },
     { to: '/patient/home-care', label: 'Home Care', icon: Heart },
     { to: '/patient/records', label: 'Health Records', icon: FileText },
     { to: '/patient/prescriptions', label: 'Prescriptions', icon: Stethoscope },
@@ -56,6 +56,7 @@ export function DashboardSidebar({ isMobileOpen, onCloseMobile }) {
   const HOSPITAL_NAV = [
     { to: '/hospital/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { to: '/hospital/verification', label: 'Verification', icon: ShieldCheck },
+    { to: '/hospital/forecast', label: 'Capacity Forecast', icon: Activity, badge: 'NEW' },
     { to: '/hospital/patients', label: 'Patients', icon: Users },
     { to: '/hospital/appointments', label: 'Appointments', icon: Calendar },
     { to: '/hospital/beds', label: 'Beds', icon: Bed },
@@ -72,6 +73,7 @@ export function DashboardSidebar({ isMobileOpen, onCloseMobile }) {
   // Admin / Authority Nav List
   const ADMIN_NAV = [
     { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { to: '/admin/capacity-forecast', label: 'Capacity Forecast', icon: Activity, badge: 'MATH' },
     { to: '/admin/verifications', label: 'Verifications', icon: ShieldCheck, badge: 'REVIEW' },
     { to: '/admin/network', label: 'Hospital Network', icon: Building2 },
     { to: '/admin/emergencies', label: 'Emergencies', icon: Siren, badge: 'ALERT' },
