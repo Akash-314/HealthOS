@@ -12,14 +12,14 @@ export function ScheduleCard({
   const defaultDoctors = [
     {
       id: 'doc-1',
-      name: 'DR. Johan Henry',
+      name: 'Dr. Rajesh Verma',
       specialty: 'General Practitioners',
       status: 'Available',
       avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=120&auto=format&fit=crop&q=80',
     },
     {
       id: 'doc-2',
-      name: 'DR. David Cooper',
+      name: 'Dr. Alok Kumar Gupta',
       specialty: 'Cardiology',
       status: 'Available',
       avatar: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=120&auto=format&fit=crop&q=80',

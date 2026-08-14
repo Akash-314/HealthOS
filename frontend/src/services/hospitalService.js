@@ -42,13 +42,29 @@ export const hospitalService = {
       result = result.filter((h) => h.availableBeds > 0);
     }
 
-    // Sort
-    if (filters.sortBy === 'distance') {
+    // 3 Explicit Criteria Sorting Algorithms requested by user
+    const sortMode = filters.sortBy || 'nearest';
+
+    if (sortMode === 'nearest') {
+      // 1. Nearest: Sort purely by distance (closest first)
       result.sort((a, b) => a.distanceKm - b.distanceKm);
-    } else if (filters.sortBy === 'beds') {
-      result.sort((a, b) => b.availableBeds - a.availableBeds);
-    } else if (filters.sortBy === 'rating') {
-      result.sort((a, b) => b.rating - a.rating);
+    } else if (sortMode === 'far_best') {
+      // 2. Far but Best: Prioritizes top rated (4.8 - 5.0) hospitals located farther away (> 5.0 km)
+      result.sort((a, b) => {
+        const isFarA = a.distanceKm >= 5.0 ? 1 : 0;
+        const isFarB = b.distanceKm >= 5.0 ? 1 : 0;
+
+        if (isFarA !== isFarB) return isFarB - isFarA; // Farther hospitals first
+        if (b.rating !== a.rating) return b.rating - a.rating; // Highest rated first
+        return b.availableBeds - a.availableBeds; // Most beds available
+      });
+    } else if (sortMode === 'nearest_best') {
+      // 3. Nearest but Best: Combines top rating with minimal distance
+      result.sort((a, b) => {
+        const scoreA = (a.rating * 10) / (a.distanceKm + 0.5);
+        const scoreB = (b.rating * 10) / (b.distanceKm + 0.5);
+        return scoreB - scoreA;
+      });
     }
 
     return result;
