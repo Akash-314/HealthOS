@@ -40,7 +40,7 @@ export function AppointmentsCard({
       name: 'Esther Howard',
       reason: 'Cardiology',
       badge: 'Today',
-      time: '12.10 AM',
+      time: '12.10 PM',
       avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80',
     },
   ];
@@ -48,7 +48,7 @@ export function AppointmentsCard({
   const list = appointments && appointments.length > 0 ? appointments : defaultList;
 
   const handleMessage = (name) => {
-    setActiveAlert(`Connecting secure chat with ${name}...`);
+    setActiveAlert(`Connecting secure chat session with ${name}...`);
     setTimeout(() => setActiveAlert(null), 3000);
   };
 
@@ -62,14 +62,14 @@ export function AppointmentsCard({
       title={title}
       subtitle={subtitle}
       action={
-        <button className="stat-card-arrow" onClick={onActionClick} title="View All Appointments" style={{ border: 'none', cursor: 'pointer' }}>
+        <button className="stat-card-arrow" onClick={onActionClick} title="View All Appointments">
           <ArrowUpRight size={16} />
         </button>
       }
     >
       <div>
         {activeAlert && (
-          <div style={{ padding: '0.5rem 0.75rem', background: '#e0f2fe', color: '#0369a1', borderRadius: 'var(--radius-md)', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.75rem' }}>
+          <div style={{ padding: '0.4rem 0.75rem', background: '#e0f2fe', color: '#0369a1', borderRadius: 'var(--radius-md)', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.75rem', animation: 'fadeIn 0.15s ease' }}>
             {activeAlert}
           </div>
         )}
@@ -79,14 +79,14 @@ export function AppointmentsCard({
             <div className="appt-user-info">
               <img src={apt.avatar} alt={apt.name} className="appt-avatar-img" />
               <div>
-                <h5 style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>{apt.name}</h5>
-                <p style={{ fontSize: '0.8rem', color: '#64748b' }}>{apt.reason}</p>
+                <h5 style={{ fontWeight: 700, fontSize: '0.925rem', color: '#0f172a', margin: 0 }}>{apt.name}</h5>
+                <p style={{ fontSize: '0.775rem', color: '#64748b', margin: '0.1rem 0 0' }}>{apt.reason}</p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>{apt.badge}</div>
+                <div style={{ fontSize: '0.725rem', color: '#94a3b8', fontWeight: 600 }}>{apt.badge}</div>
                 <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a' }}>{apt.time}</div>
               </div>
 

@@ -4,7 +4,7 @@ import { Badge } from '../ui/Badge';
 import { ArrowUpRight } from 'lucide-react';
 
 export function ScheduleCard({
-  title = "Doctor's schedule",
+  title = 'Care Team',
   subtitle = 'Key statistics on the most frequently visited polyclinics',
   doctors,
   onActionClick,
@@ -33,7 +33,7 @@ export function ScheduleCard({
       title={title}
       subtitle={subtitle}
       action={
-        <button className="stat-card-arrow" onClick={onActionClick} title="View All Staff" style={{ border: 'none', cursor: 'pointer' }}>
+        <button className="stat-card-arrow" onClick={onActionClick} title="View All Staff">
           <ArrowUpRight size={16} />
         </button>
       }
@@ -44,8 +44,8 @@ export function ScheduleCard({
             <div className="appt-user-info">
               <img src={doc.avatar} alt={doc.name} className="appt-avatar-img" />
               <div>
-                <h5 style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>{doc.name}</h5>
-                <p style={{ fontSize: '0.8rem', color: '#64748b' }}>{doc.specialty}</p>
+                <h5 style={{ fontWeight: 700, fontSize: '0.925rem', color: '#0f172a', margin: 0 }}>{doc.name}</h5>
+                <p style={{ fontSize: '0.775rem', color: '#64748b', margin: '0.1rem 0 0' }}>{doc.specialty}</p>
               </div>
             </div>
 

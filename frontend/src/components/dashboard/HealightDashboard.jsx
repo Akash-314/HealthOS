@@ -8,6 +8,7 @@ import { AppointmentsCard } from './AppointmentsCard';
 import { ScheduleCard } from './ScheduleCard';
 import { NetworkCard } from './NetworkCard';
 import { TimeFilter } from './TimeFilter';
+import './HealightDashboard.css';
 
 export function HealightDashboard({ roleTitle }) {
   const { role: userRole } = useAuth();
