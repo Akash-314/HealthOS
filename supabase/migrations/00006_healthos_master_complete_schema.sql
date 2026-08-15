@@ -345,7 +345,9 @@ ALTER TABLE public.chat_messages ENABLE ROW LEVEL SECURITY;
 -- Read & Write RLS Policies
 DROP POLICY IF EXISTS "Public read profiles" ON public.profiles;
 CREATE POLICY "Public read profiles" ON public.profiles FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Public insert profiles" ON public.profiles;
 CREATE POLICY "Public insert profiles" ON public.profiles FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS "Public update profiles" ON public.profiles;
 CREATE POLICY "Public update profiles" ON public.profiles FOR UPDATE USING (true);
 
 DROP POLICY IF EXISTS "Public read hospitals" ON public.hospitals;
