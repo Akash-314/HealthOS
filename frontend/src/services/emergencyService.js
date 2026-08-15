@@ -50,11 +50,12 @@ export const emergencyService = {
     const accessToken = this.generateAccessToken();
 
     const isRegistered = !!userProfile;
+    const isValidUuid = (id) => typeof id === 'string' && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
 
     const payload = {
       access_token: accessToken,
-      requester_user_id: userProfile?.id || null,
-      patient_profile_id: userProfile?.id || null,
+      requester_user_id: userProfile?.id && isValidUuid(userProfile.id) ? userProfile.id : null,
+      patient_profile_id: userProfile?.id && isValidUuid(userProfile.id) ? userProfile.id : null,
 
       // Guest details or Registered profile overrides
       guest_patient_name: isRegistered ? userProfile.full_name || userProfile.name : guest_patient_name,
@@ -95,6 +96,8 @@ export const emergencyService = {
       if (!error && data) {
         dbRecord = data;
         recordId = data.id;
+      } else if (error) {
+        console.warn('Supabase emergency insert notice:', error.message);
       }
     } catch (_err) {
       // Memory fallback
@@ -103,6 +106,7 @@ export const emergencyService = {
     const createdRecord = dbRecord || { id: recordId, ...payload };
     memoryEmergencies.set(createdRecord.id, createdRecord);
     memoryEmergencies.set(accessToken, createdRecord);
+    this.saveToLocalStorage(createdRecord);
 
     // Create Initial Event Log
     await this.addEmergencyEvent(createdRecord.id, 'REQUEST_CREATED', `Emergency assistance requested: ${typeDef.title}`);
@@ -118,6 +122,17 @@ export const emergencyService = {
     }, 1200);
 
     return createdRecord;
+  },
+
+  saveToLocalStorage(record) {
+    try {
+      const existing = JSON.parse(localStorage.getItem('healthos_emergency_requests') || '[]');
+      const filtered = existing.filter((r) => r.id !== record.id && r.access_token !== record.access_token);
+      filtered.unshift(record);
+      localStorage.setItem('healthos_emergency_requests', JSON.stringify(filtered.slice(0, 30)));
+    } catch (_e) {
+      // Ignore
+    }
   },
 
   /**
@@ -199,6 +214,7 @@ export const emergencyService = {
       if (updated.access_token) {
         memoryEmergencies.set(updated.access_token, updated);
       }
+      this.saveToLocalStorage(updated);
     }
   },
 

@@ -29,6 +29,20 @@ export const emergencyHospitalService = {
       requests = [];
     }
 
+    // Merge locally saved SOS requests (for demo/offline persistence across browser sessions)
+    try {
+      const localReqs = JSON.parse(localStorage.getItem('healthos_emergency_requests') || '[]');
+      for (const item of localReqs) {
+        if (!requests.some((r) => r.id === item.id || (r.access_token && r.access_token === item.access_token))) {
+          if (!hospitalId || hospitalId === 'ALL' || !item.matched_hospital_id || item.matched_hospital_id === hospitalId) {
+            requests.unshift(item);
+          }
+        }
+      }
+    } catch (_e) {
+      // Ignore
+    }
+
     // Fallback: Check memory emergencies if database empty or offline
     if (requests.length === 0) {
       const sampleList = [
